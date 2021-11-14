@@ -1,8 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
 import { API_KEY } from './apiKey';
+import { SearchResultsContext } from './App';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Navigation = () => {
+    const navigate = useNavigate();
+    const {searchResults, setSearchResults} = useContext(SearchResultsContext);
     const [searchValue, setSearchValue] = useState('');
     const submitSearch = (event) => {
         event.preventDefault();
@@ -13,7 +18,8 @@ const Navigation = () => {
             }
         })
         .then((results) => {
-            console.log(results);
+            setSearchResults([results]);
+            navigate('/search-results');
         });
     }
     return (

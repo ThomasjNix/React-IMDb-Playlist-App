@@ -4,7 +4,6 @@ import Playlists from './Playlists'
 const Home = () => {
     return (
         <div>
-            this is home
             <Playlists />
         </div>
     )

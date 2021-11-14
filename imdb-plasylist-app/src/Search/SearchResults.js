@@ -1,9 +1,14 @@
 import React from 'react'
+import { useContext } from 'react';
+import { SearchResultsContext } from '../App';
 
 const SearchResults = () => {
+    const {searchResults, setSearchResults} = useContext(SearchResultsContext);
     return (
         <div>
-            this is search results
+            { searchResults.map((result) => { 
+                return <p key={result.imdbID}>{result.Title}</p>}
+            ) }
         </div>
     )
 }

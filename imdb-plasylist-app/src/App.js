@@ -4,13 +4,20 @@ import Navigation from './Navigation';
 import SearchResults from './Search/SearchResults';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
+import { useState } from 'react';
+
+
+export const SearchResultsContext = React.createContext({
+  searchResults: [],
+  setSearchResults: () => {}
+});
 
 function App() {
-  const SearchResultsContext = React.createContext([], setSearchResults);
+  const [searchResults, setSearchResults] = useState([]);
   return (
     <Router>
       <div className="App">
-        <SearchResultsContext.Provider>
+        <SearchResultsContext.Provider value={{searchResults, setSearchResults}}>
           <Navigation />
           <Routes>
             <Route exact path="/" element={<Home />}>
