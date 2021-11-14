@@ -14,6 +14,9 @@ export const SearchResultsContext = React.createContext({
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
+  // Set up playlist data management - useReducer? 
+  // Also - improve SearchResultsContext with Redux pattern? May not be necessary
+  // If multiple playlists, need component for handling playlists & selecting from search results page
   return (
     <Router>
       <div className="App">
