@@ -5,22 +5,24 @@ import SearchResults from './Search/SearchResults';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import { useState } from 'react';
-
+import { reducer } from './redux/reducer';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 export const SearchResultsContext = React.createContext({
   searchResults: [],
-  setSearchResults: () => {}
+  setSearchResults: () => { }
 });
+
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
-  // Set up playlist data management - useReducer? 
-  // Also - improve SearchResultsContext with Redux pattern? May not be necessary
+  // Improve SearchResultsContext with Redux pattern? May not be necessary
   // If multiple playlists, need component for handling playlists & selecting from search results page
   return (
     <Router>
       <div className="App">
-        <SearchResultsContext.Provider value={{searchResults, setSearchResults}}>
+        <SearchResultsContext.Provider value={{ searchResults, setSearchResults }}>
           <Navigation />
           <Routes>
             <Route exact path="/" element={<Home />}>
@@ -34,4 +36,16 @@ function App() {
   );
 }
 
-export default App;
+
+const AppWrapper = () => {
+  const store = createStore(reducer);
+
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+}
+
+
+export default AppWrapper;

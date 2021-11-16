@@ -6,22 +6,39 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Navigation = () => {
-    const navigate = useNavigate();
-    const {searchResults, setSearchResults} = useContext(SearchResultsContext);
-    const [searchValue, setSearchValue] = useState('');
+    const removeDuplicateResults = (noDuplicateResults) => {
+        const IDs = [];
+        for (let i = noDuplicateResults.length - 1; i >= 0; i--) {
+            if (IDs.indexOf(noDuplicateResults[i].imdbID) === -1) {
+                IDs.push(noDuplicateResults[i].imdbID);
+            } else {
+                noDuplicateResults.splice(i, 1);
+            }
+        }
+        return noDuplicateResults;
+    }
     const submitSearch = (event) => {
         event.preventDefault();
-        fetch(`http://www.omdbapi.com/?t=${searchValue}&apikey=${API_KEY}`)
+        fetch(`http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`)
         .then((res) => {
             if (res.ok) {
                 return res.json();
             }
         })
         .then((results) => {
-            setSearchResults([results]);
+            if (results && results.Search) {
+                // Encountered duplicates in some responses, this will prevent duplicate elements from being rendered with the same key in SearchResults
+                let noDuplicateResults = removeDuplicateResults(results.Search);
+                setSearchResults(noDuplicateResults);
+            } else {
+                setSearchResults([]);
+            }
             navigate('/search-results');
         });
     }
+    const navigate = useNavigate();
+    const setSearchResults = useContext(SearchResultsContext).setSearchResults;
+    const [searchValue, setSearchValue] = useState('');
     return (
         <div>
             <h3>IMDb playlist app</h3>

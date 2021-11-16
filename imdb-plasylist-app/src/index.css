@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.playlists {
+  list-style-type: none;
+}
+.playlists .no-movies-in-playlist {
+  font-style: italic;
+}
