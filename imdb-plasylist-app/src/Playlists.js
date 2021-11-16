@@ -38,9 +38,16 @@ const Playlists = () => {
     const userPlaylists = useSelector(state => state.userPlaylists);
     return (
         <div>
+            {!newPlaylistInProgress && <Button size="small" className="create-new-playlist" variant="contained" onClick={() => { setNewPlaylistInProgress(true) }}>Create new playlist</Button>}
+            {newPlaylistInProgress &&
+                <form onSubmit={(event) => {saveNewPlaylist(event)}}>
+                    <Input type="text" onChange={(event) => { setNewPlaylistValue(event.target.value) }} />
+                    <Button disabled={newPlaylistValue === ''} size="small" variant="text" onClick={() => { saveNewPlaylist() }}>Save</Button>
+                </form>
+            }
             {userPlaylists && userPlaylists.length > 0 && <Grid container spacing={2} className="playlists">
                 {userPlaylists.map((playlist) => {
-                    return <Grid item xs={6} lg={4} className="playlist-item" key={playlist.id}>
+                    return <Grid item xs={12} lg={4} className="playlist-item" key={playlist.id}>
                         <Card variant="outlined">
                             <CardContent>
                             <h4>{playlist.name}</h4>
@@ -64,13 +71,6 @@ const Playlists = () => {
                 })}
             </Grid>}
             {(!userPlaylists || userPlaylists.length === 0) && <p>User has no current playlists</p>}
-            {!newPlaylistInProgress && <Button size="small" className="create-new-playlist" variant="contained" onClick={() => { setNewPlaylistInProgress(true) }}>Create new playlist</Button>}
-            {newPlaylistInProgress &&
-                <form onSubmit={(event) => {saveNewPlaylist(event)}}>
-                    <Input type="text" onChange={(event) => { setNewPlaylistValue(event.target.value) }} />
-                    <Button disabled={newPlaylistValue === ''} size="small" variant="text" onClick={() => { saveNewPlaylist() }}>Save</Button>
-                </form>
-            }
         </div>
     )
 }

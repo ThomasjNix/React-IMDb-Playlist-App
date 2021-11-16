@@ -6,6 +6,36 @@ import { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button, Input } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import SearchIcon from '@mui/icons-material/Search';
+import { styled, alpha } from '@mui/material/styles';
+
+const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  }));
+  
+  const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
 
 const Navigation = () => {
     const location = useLocation();
@@ -47,16 +77,50 @@ const Navigation = () => {
     const setSearchResults = useContext(SearchResultsContext).setSearchResults;
     const [searchValue, setSearchValue] = useState('');
     return (
-        <div className="top-nav">
-            <h3>IMDb playlist app</h3>
-            <div className="nav-actions">
-            {location.pathname !== '/' && <Link className="return-home" underline="none" to="/">Return Home</Link>}
-            <form onSubmit={(event) => { submitSearch(event) }}>
-                <Input type="text" placeholder="Enter a movie name" onChange={(event) => { setSearchValue(event.target.value) }} />
-                <Button disabled={searchValue === ''} size="small" variant="text" onClick={() => { submitSearch() }}>Search</Button>
+
+
+
+      
+        <AppBar position="static">
+          <Toolbar className={location.pathname === '/' ? 'nav-toolbar home' : 'nav-toolbar'}>
+          
+              {location.pathname !== '/' && <Link className="return-home" underline="none" to="/">Return Home</Link>}
+         
+            <Search className="nav-search-container">
+              <SearchIconWrapper>
+                <SearchIcon className="search-wrapper"/>
+              </SearchIconWrapper>
+              <form onSubmit={(event) => { submitSearch(event) }}>
+                <Input type="text" className="search-input" onChange={(event) => { setSearchValue(event.target.value) }} />
+                <Button className="search-button" disabled={searchValue === ''} size="small" variant="text" onClick={() => { submitSearch() }}>Search</Button>
             </form>
-            </div>
-        </div>
+            </Search>
+          </Toolbar>
+        </AppBar>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // <div className="top-nav">
+        //     <h3>IMDb playlist app</h3>
+        //     <div className="nav-actions">
+        //     {location.pathname !== '/' && <Link className="return-home" underline="none" to="/">Return Home</Link>}
+        //     <form onSubmit={(event) => { submitSearch(event) }}>
+        //         <Input type="text" placeholder="Enter a movie name" onChange={(event) => { setSearchValue(event.target.value) }} />
+        //         <Button disabled={searchValue === ''} size="small" variant="text" onClick={() => { submitSearch() }}>Search</Button>
+        //     </form>
+        //     </div>
+        // </div>
     )
 }
 

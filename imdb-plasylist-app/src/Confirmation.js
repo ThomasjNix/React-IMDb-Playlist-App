@@ -24,7 +24,7 @@ const Confirmation = () => {
             <p>Movies in playlist:</p>
             <Grid container spacing={2} className="confirmation-grid">
                 {playlistData && playlistData.movies && playlistData.movies.map((movie) => {
-                    return <Grid key={movie.imdbID} item xs={6} lg={2} className="movie">
+                    return <Grid key={movie.imdbID} item xs={12} lg={2} className="movie">
                         <Card className="card">
                             <CardContent>
                                 <img src={movie.Poster} alt={movie.Title + ' poster'} />
