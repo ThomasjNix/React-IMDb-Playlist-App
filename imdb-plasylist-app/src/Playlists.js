@@ -3,6 +3,7 @@ import { ACTIONS } from './redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Button, ButtonGroup, Input, List, ListItem, Grid, Card, CardContent, CardActions } from '@mui/material';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const Playlists = () => {
     const navigate = useNavigate();
@@ -11,9 +12,11 @@ const Playlists = () => {
         if (event) {
             event.preventDefault();
         }
-        dispatch({ type: ACTIONS.CREATE_PLAYLIST, payload: { playlistName: newPlaylistValue } });
-        setNewPlaylistValue('');
-        setNewPlaylistInProgress(false);
+        if (newPlaylistValue) {
+            dispatch({ type: ACTIONS.CREATE_PLAYLIST, payload: { playlistName: newPlaylistValue } });
+            setNewPlaylistValue('');
+            setNewPlaylistInProgress(false);
+        }
     }
     
     const confirmPlaylist = (playlist) => {
@@ -25,6 +28,9 @@ const Playlists = () => {
     }
     const deletePlaylist = (playlist) => {
         dispatch({ type: ACTIONS.DELETE_PLAYLIST, payload: { playlist } });
+    }
+    const removeMovieFromPlaylist = (playlist, movie) => {
+        dispatch({ type: ACTIONS.REMOVE_MOVIE_FROM_PLAYLIST, payload: { playlistID: playlist.id, movieID: movie.imdbID } });
     }
 
     const [newPlaylistValue, setNewPlaylistValue] = useState('');
@@ -39,7 +45,10 @@ const Playlists = () => {
                             <CardContent>
                             <h4>{playlist.name}</h4>
                             <p className="playlist-description">
-                                {playlist.movies.length > 0 && playlist.movies.map((movie, index) => `${movie.Title}${index === playlist.movies.length - 1 ? '' : ', '}`) }
+                                {playlist.movies.length > 0 && playlist.movies.map((movie, index) => <span key={playlist.name + '-' + movie.imdbID}>
+                                    <CancelIcon onClick={() => {removeMovieFromPlaylist(playlist, movie)}}></CancelIcon>
+                                    {movie.Title}
+                                </span>) }
                                 {(!playlist || !playlist.movies || playlist.movies.length === 0) && <span className="no-movies-in-playlist">No movies in this playlist.</span>}
                             </p>
                             </CardContent>
@@ -59,7 +68,7 @@ const Playlists = () => {
             {newPlaylistInProgress &&
                 <form onSubmit={(event) => {saveNewPlaylist(event)}}>
                     <Input type="text" onChange={(event) => { setNewPlaylistValue(event.target.value) }} />
-                    <Button size="small" variant="text" onClick={() => { saveNewPlaylist() }}>Save</Button>
+                    <Button disabled={newPlaylistValue === ''} size="small" variant="text" onClick={() => { saveNewPlaylist() }}>Save</Button>
                 </form>
             }
         </div>

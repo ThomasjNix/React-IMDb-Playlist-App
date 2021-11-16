@@ -5,4 +5,5 @@ export const ACTIONS = {
     'CANCEL_PLAYLIST': 'cancel-playlist',
     'CREATE_PLAYLIST': 'create-playlist',
     'DELETE_PLAYLIST': 'delete-playlist',
+    'REMOVE_MOVIE_FROM_PLAYLIST': 'remove-movie-from-playlist'
 };

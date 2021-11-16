@@ -1,13 +1,15 @@
 import { ACTIONS } from "./actions";
+import { v4 as uuidv4 } from 'uuid';
 
 const INITIAL_STATE = {
     userPlaylists: [
         {
             name: 'My Playlist',
             movies: [],
-            id: 0,
+            id: uuidv4(),
             inEdit: false,
-            inEditMovies: []
+            inEditMovies: [],
+            inEditRemovedMovies: []
         }
     ]
 };
@@ -41,7 +43,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
                 updatedPlaylist.push({
                     name: action.payload.playlistName,
                     movies: [],
-                    id: state.userPlaylists.length,
+                    id: uuidv4(),
                     inEdit: false,
                     inEditMovies: []
                 });
@@ -56,6 +58,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
                 if (playlist.id === action.payload.playlist.id) {
                     playlist.inEdit = false;
                     playlist.inEditMovies = [];
+                    playlist.inEditRemovedMovies = [];
                 }
                 return playlist;
             })}
@@ -67,6 +70,29 @@ export const reducer = (state = INITIAL_STATE, action) => {
                     playlist.movies = playlist.movies.filter((movie) => inEditMovieNames.indexOf(movie.Title) === -1);
                     playlist.inEditMovies = [];
                     playlist.inEdit = false;
+                    for (const movie of playlist.inEditRemovedMovies) {
+                        playlist.movies.push(movie);
+                    }
+                    playlist.inEditRemovedMovies = [];
+                }
+                return playlist;
+            })}
+        case ACTIONS.REMOVE_MOVIE_FROM_PLAYLIST:
+            return {...state, userPlaylists: state.userPlaylists.map((playlist) => {
+                if (playlist.id === action.payload.playlistID) {
+                    const removeIndex = playlist.movies.findIndex((movie) => movie.imdbID === action.payload.movieID);
+                    const removeInEditIndex = playlist.inEditMovies.findIndex((movie) => movie.imdbID === action.payload.movieID);
+                    const removedMovie = playlist.movies[removeIndex];
+                    // Remove from list of movies
+                    playlist.movies.splice(removeIndex, 1);
+                    // Also remove from in edit movies if it exists (for when playlist is not yet confirmed)
+                    if (removeInEditIndex > -1) {
+                        playlist.inEditMovies.splice(removeIndex, 1);
+                    } else {
+                        // Add to inEditRemovedMovies for when playlist is confirmed so that cancel changes will add back to movies list
+                        playlist.inEditRemovedMovies.push(removedMovie);
+                    }
+                    playlist.inEdit = true;
                 }
                 return playlist;
             })}

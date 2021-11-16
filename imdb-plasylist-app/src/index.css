@@ -12,6 +12,20 @@ code {
     monospace;
 }
 
+.playlist-description {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.playlist-description span {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+.playlist-description span svg {
+  color: red;
+  margin-right: 0.5rem;
+}
 div.search-results-list,
 div.playlists {
   width: 80vw;
@@ -63,4 +77,28 @@ form button {
 .single-result-actions {
   display: flex;
   justify-content: center;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.nav-actions a {
+  margin-right: 1rem;
+}
+
+div.confirmation-grid {
+  width: 80vw;
+  margin: 0 auto;  
+}
+
+div.confirmation-grid img {
+  width: 10rem;
+  height: 15rem;
+}
+div.confirmation-grid p {
+  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

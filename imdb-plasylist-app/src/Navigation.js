@@ -20,9 +20,12 @@ const Navigation = () => {
         }
         return noDuplicateResults;
     }
-    const submitSearch = (event) => {
-        event.preventDefault();
-        fetch(`http://www.omdbapi.com/?s=${searchValue.trim()}&apikey=${API_KEY}`)
+    const submitSearch = (event = null) => {
+        if (event) {
+            event.preventDefault();
+        }
+        if (searchValue) {
+            fetch(`http://www.omdbapi.com/?s=${searchValue.trim()}&apikey=${API_KEY}`)
             .then((res) => {
                 if (res.ok) {
                     return res.json();
@@ -38,6 +41,7 @@ const Navigation = () => {
                 }
                 navigate('/search-results');
             });
+        }
     }
     const navigate = useNavigate();
     const setSearchResults = useContext(SearchResultsContext).setSearchResults;
@@ -45,11 +49,13 @@ const Navigation = () => {
     return (
         <div className="top-nav">
             <h3>IMDb playlist app</h3>
+            <div className="nav-actions">
+            {location.pathname !== '/' && <Link className="return-home" underline="none" to="/">Return Home</Link>}
             <form onSubmit={(event) => { submitSearch(event) }}>
                 <Input type="text" placeholder="Enter a movie name" onChange={(event) => { setSearchValue(event.target.value) }} />
-                <Button size="small" variant="text">Search</Button>
+                <Button disabled={searchValue === ''} size="small" variant="text" onClick={() => { submitSearch() }}>Search</Button>
             </form>
-            {location.pathname !== '/' && <Link className="return-home" underline="none" to="/">Return Home</Link>}
+            </div>
         </div>
     )
 }

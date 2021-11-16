@@ -12,7 +12,7 @@ const SearchResults = () => {
     return (
         <Grid spacing={2} container className="search-results-list">
             {searchResults.map((result) => {
-                return <Grid item xs={6} lg={4}>
+                return <Grid key={result.imdbID} item xs={6} lg={4}>
                     
                         <SingleResult playlists={state.userPlaylists} key={result.imdbID} result={result} />
                   
