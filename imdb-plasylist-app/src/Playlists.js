@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ACTIONS } from './redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { Button, ButtonGroup, Input, List, ListItem, Grid, Card, CardContent, CardActions } from '@mui/material';
+import { Button, ButtonGroup, Input, Grid, Card, CardContent, CardActions } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 const Playlists = () => {

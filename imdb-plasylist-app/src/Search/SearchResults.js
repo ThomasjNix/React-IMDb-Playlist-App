@@ -3,8 +3,7 @@ import { useContext } from 'react';
 import { SearchResultsContext } from '../App';
 import SingleResult from './SingleResult';
 import { useSelector } from 'react-redux';
-import ImageList from '@mui/material/ImageList';
-import { Grid, Card } from '@mui/material';
+import { Grid } from '@mui/material';
 
 const SearchResults = () => {
     const searchResults = useContext(SearchResultsContext).searchResults;

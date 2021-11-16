@@ -6,7 +6,6 @@ import Confirmation from './Confirmation';
 import Footer from './Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
-import { ReactDOM } from 'react';
 import { useState } from 'react';
 import { reducer } from './redux/reducer';
 import { Provider } from 'react-redux';

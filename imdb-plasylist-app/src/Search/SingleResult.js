@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { ACTIONS } from '../redux/actions';
 import { Button } from '@mui/material';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import { Card, CardContent, CardActions, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Card, CardContent, CardActions, Select, MenuItem, FormControl } from '@mui/material';
 
 const SingleResult = ({ result, playlists }) => {
     const dispatch = useDispatch();
