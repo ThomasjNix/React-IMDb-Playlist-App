@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { ACTIONS } from './redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const Playlists = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const saveNewPlaylist = () => {
         dispatch({ type: ACTIONS.CREATE_PLAYLIST, payload: { playlistName: newPlaylistValue } });
@@ -12,6 +14,7 @@ const Playlists = () => {
     
     const confirmPlaylist = (playlist) => {
         dispatch({ type: ACTIONS.CONFIRM_PLAYLIST, payload: { playlist } });
+        navigate(`/confirmation/${playlist.id}`);
     }
     const cancelPlaylist = (playlist) => {
         dispatch({ type: ACTIONS.CANCEL_PLAYLIST, payload: { playlist } });

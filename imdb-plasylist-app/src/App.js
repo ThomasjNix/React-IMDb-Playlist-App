@@ -2,6 +2,7 @@ import './App.css';
 import Home from './Home';
 import Navigation from './Navigation';
 import SearchResults from './Search/SearchResults';
+import Confirmation from './Confirmation';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import { useState } from 'react';
@@ -28,6 +29,8 @@ function App() {
             <Route exact path="/" element={<Home />}>
             </Route>
             <Route exact path="/search-results" element={<SearchResults />}>
+            </Route>
+            <Route exact path="/confirmation/:id" element={<Confirmation />}>
             </Route>
           </Routes>
         </SearchResultsContext.Provider>
