@@ -18,3 +18,18 @@ code {
 .playlists .no-movies-in-playlist {
   font-style: italic;
 }
+
+.body-container {
+  margin-bottom: 10rem;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  padding: 0.5rem 0;
+}
+.confirmation-footer {
+  background-color: blue;
+  color: white;
+}
