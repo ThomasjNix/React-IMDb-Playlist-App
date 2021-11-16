@@ -2,6 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from '../redux/actions';
+import { Button } from '@mui/material';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
 
 const SingleResult = ({ result, playlists }) => {
     const dispatch = useDispatch();
@@ -13,16 +16,16 @@ const SingleResult = ({ result, playlists }) => {
     }
     const [selectedPlaylist, setSelectedPlaylist] = useState(playlists[0].name);
     return (
-        <div className="result">
-            {result.Poster && <img src={result.Poster} alt={result.Title + ' poster'} />}
-            <p>{result.Title}</p>
+        <ImageListItem className="result">
+            {result.Poster && <img className="poster" loading="lazy" src={result.Poster} alt={result.Title + ' poster'} />}
+            <ImageListItemBar title={result.title} position="below"/>
             <select onChange={(event) => {setSelectedPlaylist(event.target.value)}}>
                 {playlists.map((playlist) => {
                     return <option key={`${result.imdbID}-${playlist.id}`}>{playlist.name}</option>
                 })}
             </select>
-            <button onClick={() => {addToSelectedPlaylist()}}>Add to playlist</button>
-        </div>
+            <Button variant="contained" onClick={() => {addToSelectedPlaylist()}}>Add to playlist</Button>
+        </ImageListItem>
     )
 }
 

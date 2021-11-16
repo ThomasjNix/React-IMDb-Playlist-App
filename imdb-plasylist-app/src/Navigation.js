@@ -5,6 +5,7 @@ import { SearchResultsContext } from './App';
 import { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { Button, Input } from '@mui/material';
 
 const Navigation = () => {
     const location = useLocation();
@@ -45,8 +46,8 @@ const Navigation = () => {
         <div>
             <h3>IMDb playlist app</h3>
             <form onSubmit={(event) => { submitSearch(event) }}>
-                <input type="text" placeholder="Enter a movie name" onChange={(event) => { setSearchValue(event.target.value) }} />
-                <button>Search</button>
+                <Input type="text" placeholder="Enter a movie name" onChange={(event) => { setSearchValue(event.target.value) }} />
+                <Button variant="contained">Search</Button>
             </form>
             {location.pathname !== '/' && <Link to="/">Return Home</Link>}
         </div>

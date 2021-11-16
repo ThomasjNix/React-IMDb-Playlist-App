@@ -19,6 +19,10 @@ code {
   font-style: italic;
 }
 
+.poster {
+  max-width: 5vw;
+}
+
 .body-container {
   margin-bottom: 10rem;
 }
