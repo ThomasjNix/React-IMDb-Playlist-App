@@ -13,6 +13,9 @@ const Playlists = () => {
     const confirmPlaylist = (playlist) => {
         dispatch({ type: ACTIONS.CONFIRM_PLAYLIST, payload: { playlist } });
     }
+    const deletePlaylist = (playlist) => {
+        dispatch({ type: ACTIONS.DELETE_PLAYLIST, payload: { playlist } });
+    }
 
     const [newPlaylistValue, setNewPlaylistValue] = useState('');
     const [newPlaylistInProgress, setNewPlaylistInProgress] = useState(false);
@@ -26,6 +29,7 @@ const Playlists = () => {
                         {playlist.name}: {playlist.movies.length > 0 && playlist.movies.map((movie, index) => `${movie.Title}${index === playlist.movies.length - 1 ? '' : ', '}`) }
                         {(!playlist || !playlist.movies || playlist.movies.length === 0) && <span className="no-movies-in-playlist">No movies in this playlist.</span>}
                         { playlist.inEdit && <button onClick={() => { confirmPlaylist(playlist)}}>Confirm playlist</button>}
+                        <button onClick={() => { deletePlaylist(playlist)}}>Delete playlist</button>
                     </li>
                 })}
             </ul>}

@@ -36,7 +36,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
             });
             return { ...state, userPlaylists: updatedPlaylist };
         case ACTIONS.DELETE_PLAYLIST:
-            break;
+            return { ...state, userPlaylists: state.userPlaylists.filter((playlist) => playlist.id !== action.payload.playlist.id)}
         case ACTIONS.CONFIRM_PLAYLIST:
             return {...state, userPlaylists: state.userPlaylists.map((playlist) => {
                 if (playlist.id === action.payload.playlist.id) {
