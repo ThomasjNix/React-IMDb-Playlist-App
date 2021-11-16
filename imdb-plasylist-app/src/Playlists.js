@@ -19,7 +19,8 @@ const Playlists = () => {
             {state && state.userPlaylists && state.userPlaylists.length > 0 && <ul className="playlists">
                 {state.userPlaylists.map((playlist) => {
                     return <li key={playlist.id}>
-                        {playlist.name} - {playlist.movies.length > 0 ? playlist.movies : <span className="no-movies-in-playlist">No movies in this playlist.</span>}
+                        {playlist.name}: {playlist.movies.length > 0 && playlist.movies.map((movie, index) => `${movie.Title}${index === playlist.movies.length - 1 ? '' : ', '}`) }
+                        {(!playlist || !playlist.movies || playlist.movies.length === 0) && <span className="no-movies-in-playlist">No movies in this playlist.</span>}
                     </li>
                 })}
             </ul>}

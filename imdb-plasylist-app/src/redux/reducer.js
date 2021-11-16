@@ -5,7 +5,8 @@ const INITIAL_STATE = {
         {
             name: 'My Playlist',
             movies: [],
-            id: 0
+            id: 0,
+            inEdit: false
         }
     ]
 };
@@ -13,12 +14,19 @@ const INITIAL_STATE = {
 export const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ACTIONS.ADD_TO_PLAYLIST:
-            break;
+            let playlistIndex = state.userPlaylists.findIndex((playlist) => playlist.name === action.payload.playlistName);
+            state.userPlaylists[playlistIndex].movies.push(action.payload.movieContent);
+            return state;
         case ACTIONS.REMOVE_FROM_PLAYLIST:
             break;
         case ACTIONS.CREATE_PLAYLIST:
             const updatedPlaylist = state.userPlaylists;
-            updatedPlaylist.push({ name: action.payload.playlistName, movies: [], id: state.userPlaylists.length });
+            updatedPlaylist.push({
+                name: action.payload.playlistName,
+                movies: [],
+                id: state.userPlaylists.length,
+                inEdit: false
+            });
             return { ...state, userPlaylists: updatedPlaylist };
         case ACTIONS.DELETE_PLAYLIST:
             break;
