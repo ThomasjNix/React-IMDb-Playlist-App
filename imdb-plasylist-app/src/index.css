@@ -12,15 +12,26 @@ code {
     monospace;
 }
 
-.playlists {
-  list-style-type: none;
+div.search-results-list,
+div.playlists {
+  width: 80vw;
+  margin: 0 auto;
+  
 }
-.playlists .no-movies-in-playlist {
+div.playlists .no-movies-in-playlist {
   font-style: italic;
+}
+.return-home {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.create-new-playlist {
+  margin-top: 5vh;
 }
 
 .poster {
-  max-width: 5vw;
+  max-width: 10vw;
 }
 
 .body-container {
@@ -30,10 +41,26 @@ code {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: white;
+  background-color: lightgray;
   padding: 0.5rem 0;
 }
 .confirmation-footer {
   background-color: blue;
   color: white;
+}
+
+form button {
+  margin-right: 0.5rem;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
+.single-result-actions {
+  display: flex;
+  justify-content: center;
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ACTIONS } from './redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { Button, Input, List, ListItem } from '@mui/material';
+import { Button, ButtonGroup, Input, List, ListItem, Grid, Card, CardContent, CardActions } from '@mui/material';
 
 const Playlists = () => {
     const navigate = useNavigate();
@@ -32,24 +32,34 @@ const Playlists = () => {
     const userPlaylists = useSelector(state => state.userPlaylists);
     return (
         <div>
-            {/* Load playlists - need single playlist component to pass data to */}
-            {userPlaylists && userPlaylists.length > 0 && <List className="playlists">
+            {userPlaylists && userPlaylists.length > 0 && <Grid container spacing={2} className="playlists">
                 {userPlaylists.map((playlist) => {
-                    return <ListItem key={playlist.id}>
-                        {playlist.name}: {playlist.movies.length > 0 && playlist.movies.map((movie, index) => `${movie.Title}${index === playlist.movies.length - 1 ? '' : ', '}`) }
-                        {(!playlist || !playlist.movies || playlist.movies.length === 0) && <span className="no-movies-in-playlist">No movies in this playlist.</span>}
-                        { playlist.inEdit && <Button variant="contained" onClick={() => { confirmPlaylist(playlist)}}>Confirm playlist</Button>}
-                        { playlist.inEdit && <Button variant="contained" onClick={() => { cancelPlaylist(playlist)}}>Cancel playlist changes</Button>}
-                        {userPlaylists.length !== 1 && <Button variant="contained" onClick={() => { deletePlaylist(playlist)}}>Delete playlist</Button>}
-                    </ListItem>
+                    return <Grid item xs={6} lg={4} className="playlist-item" key={playlist.id}>
+                        <Card variant="outlined">
+                            <CardContent>
+                            <h4>{playlist.name}</h4>
+                            <p className="playlist-description">
+                                {playlist.movies.length > 0 && playlist.movies.map((movie, index) => `${movie.Title}${index === playlist.movies.length - 1 ? '' : ', '}`) }
+                                {(!playlist || !playlist.movies || playlist.movies.length === 0) && <span className="no-movies-in-playlist">No movies in this playlist.</span>}
+                            </p>
+                            </CardContent>
+                            <CardActions>
+                                <ButtonGroup size="small" aria-label="small button group">
+                                    { playlist.inEdit && <Button size="small" color="success" variant="contained" onClick={() => { confirmPlaylist(playlist)}}>Confirm</Button>}
+                                    { playlist.inEdit && <Button size="small" color="secondary" variant="contained" onClick={() => { cancelPlaylist(playlist)}}>Cancel changes</Button>}
+                                    {userPlaylists.length !== 1 && <Button color="error" size="small" variant="contained" onClick={() => { deletePlaylist(playlist)}}>Delete</Button>}
+                                </ButtonGroup>
+                            </CardActions>
+                        </Card>
+                    </Grid>
                 })}
-            </List>}
+            </Grid>}
             {(!userPlaylists || userPlaylists.length === 0) && <p>User has no current playlists</p>}
-            {!newPlaylistInProgress && <Button variant="contained" onClick={() => { setNewPlaylistInProgress(true) }}>Create new playlist</Button>}
+            {!newPlaylistInProgress && <Button size="small" className="create-new-playlist" variant="contained" onClick={() => { setNewPlaylistInProgress(true) }}>Create new playlist</Button>}
             {newPlaylistInProgress &&
                 <form onSubmit={(event) => {saveNewPlaylist(event)}}>
                     <Input type="text" onChange={(event) => { setNewPlaylistValue(event.target.value) }} />
-                    <Button variant="contained" onClick={() => { saveNewPlaylist() }}>Save</Button>
+                    <Button size="small" variant="text" onClick={() => { saveNewPlaylist() }}>Save</Button>
                 </form>
             }
         </div>

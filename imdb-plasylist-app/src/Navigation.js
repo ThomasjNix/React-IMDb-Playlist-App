@@ -22,7 +22,7 @@ const Navigation = () => {
     }
     const submitSearch = (event) => {
         event.preventDefault();
-        fetch(`http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`)
+        fetch(`http://www.omdbapi.com/?s=${searchValue.trim()}&apikey=${API_KEY}`)
             .then((res) => {
                 if (res.ok) {
                     return res.json();
@@ -43,13 +43,13 @@ const Navigation = () => {
     const setSearchResults = useContext(SearchResultsContext).setSearchResults;
     const [searchValue, setSearchValue] = useState('');
     return (
-        <div>
+        <div className="top-nav">
             <h3>IMDb playlist app</h3>
             <form onSubmit={(event) => { submitSearch(event) }}>
                 <Input type="text" placeholder="Enter a movie name" onChange={(event) => { setSearchValue(event.target.value) }} />
-                <Button variant="contained">Search</Button>
+                <Button size="small" variant="text">Search</Button>
             </form>
-            {location.pathname !== '/' && <Link to="/">Return Home</Link>}
+            {location.pathname !== '/' && <Link className="return-home" underline="none" to="/">Return Home</Link>}
         </div>
     )
 }

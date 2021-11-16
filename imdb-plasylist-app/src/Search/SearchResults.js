@@ -4,17 +4,22 @@ import { SearchResultsContext } from '../App';
 import SingleResult from './SingleResult';
 import { useSelector } from 'react-redux';
 import ImageList from '@mui/material/ImageList';
+import { Grid, Card } from '@mui/material';
 
 const SearchResults = () => {
     const searchResults = useContext(SearchResultsContext).searchResults;
     const state = useSelector(state => state);
     return (
-        <ImageList sx={{ width: "80vw"}} className="search-results-list">
+        <Grid spacing={2} container className="search-results-list">
             {searchResults.map((result) => {
-                return <SingleResult playlists={state.userPlaylists} key={result.imdbID} result={result} />
+                return <Grid item xs={6} lg={4}>
+                    
+                        <SingleResult playlists={state.userPlaylists} key={result.imdbID} result={result} />
+                  
+                </Grid>
             }
             )}
-        </ImageList>
+        </Grid>
     )
 }
 
