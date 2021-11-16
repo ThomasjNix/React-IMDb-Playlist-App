@@ -2,7 +2,7 @@ import React from 'react'
 import { useContext } from 'react';
 import { SearchResultsContext } from '../App';
 import { Link } from 'react-router-dom';
-import  SingleResult from './SingleResult';
+import SingleResult from './SingleResult';
 import { useSelector } from 'react-redux';
 
 const SearchResults = () => {
@@ -12,7 +12,7 @@ const SearchResults = () => {
         <div>
             <Link to="/">Return Home</Link>
             {searchResults.map((result) => {
-                return <SingleResult playlists={state.userPlaylists} key={result.imdbID} result={result}/>
+                return <SingleResult playlists={state.userPlaylists} key={result.imdbID} result={result} />
             }
             )}
         </div>

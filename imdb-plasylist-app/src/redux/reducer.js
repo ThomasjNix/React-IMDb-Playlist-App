@@ -6,7 +6,8 @@ const INITIAL_STATE = {
             name: 'My Playlist',
             movies: [],
             id: 0,
-            inEdit: false
+            inEdit: false,
+            inEditMovies: []
         }
     ]
 };
@@ -14,9 +15,14 @@ const INITIAL_STATE = {
 export const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ACTIONS.ADD_TO_PLAYLIST:
-            let playlistIndex = state.userPlaylists.findIndex((playlist) => playlist.name === action.payload.playlistName);
-            state.userPlaylists[playlistIndex].movies.push(action.payload.movieContent);
-            return state;
+            return {...state, userPlaylists: state.userPlaylists.map((playlist) => {
+                if (playlist.name === action.payload.playlistName) {
+                    playlist.movies.push(action.payload.movieContent);
+                    playlist.inEditMovies.push(action.payload.movieContent);
+                    playlist.inEdit = true;
+                }
+                return playlist;
+            })}
         case ACTIONS.REMOVE_FROM_PLAYLIST:
             break;
         case ACTIONS.CREATE_PLAYLIST:
@@ -25,11 +31,20 @@ export const reducer = (state = INITIAL_STATE, action) => {
                 name: action.payload.playlistName,
                 movies: [],
                 id: state.userPlaylists.length,
-                inEdit: false
+                inEdit: false,
+                inEditMovies: []
             });
             return { ...state, userPlaylists: updatedPlaylist };
         case ACTIONS.DELETE_PLAYLIST:
             break;
+        case ACTIONS.CONFIRM_PLAYLIST:
+            return {...state, userPlaylists: state.userPlaylists.map((playlist) => {
+                if (playlist.id === action.payload.playlist.id) {
+                    playlist.inEdit = false;
+                    playlist.inEditMovies = [];
+                }
+                return playlist;
+            })}
         default:
             return state;
     }
