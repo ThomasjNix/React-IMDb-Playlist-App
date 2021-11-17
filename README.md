@@ -8,9 +8,9 @@ This is simple demonstration app for a React based front-end application that us
 
 This repository is divided into 2 segments - imdb-playlist-app (UI) and server (API).
 
-* To load the UI locally, simply `cd` to imdb-playlist-app and run `npm run start`
+* To load the UI locally, simply `cd` to imdb-playlist-app and run `npm install` to install all necessary UI packages, followed by `npm run start`. `npm install` only needs to be run once.
 
-* To build the UI and serve it locally via an Express server, remain in this root directory and run `npm run start`
+* To build the UI and serve it locally via an Express server, remain in this root directory and run `npm run first-start`. This will install all necessary packages (UI and API alike), and then start the build and serve process. This only needs to be run the first time, afterwards running `npm run start` will suffice.
 
 ### Packages used
 

@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd server && npm run start"
+    "start": "cd server && npm run start",
+    "install-ui": "cd imdb-playlist-app && npm install",
+    "install-api": "cd server && npm install",
+    "first-start": "npm run install-ui && npm run install-api && npm run start"
   },
   "repository": {
     "type": "git",
