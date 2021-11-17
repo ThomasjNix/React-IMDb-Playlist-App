@@ -39,8 +39,16 @@ div.playlists .no-movies-in-playlist {
   text-decoration: none;
   color: black;
   font-weight: bold;
+  display: flex;
 }
 
+.return-home:hover {
+  color: white;
+}
+
+.return-home svg {
+  margin-right: 1rem;
+}
 .create-new-playlist {
   margin-top: 5vh;
 }
@@ -49,9 +57,6 @@ div.nav-toolbar {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-}
-div.nav-toolbar.home {
-  justify-content: flex-end;
 }
 
 .search-wrapper svg {
@@ -74,8 +79,9 @@ div.nav-toolbar.home {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: lightgray;
+  background-color: rgb(25, 118, 210);
   padding: 0.5rem 0;
+  color: white;
 }
 .confirmation-footer {
   background-color: blue;
@@ -113,8 +119,7 @@ div.confirmation-grid {
 }
 
 div.confirmation-grid img {
-  width: 10rem;
-  height: 15rem;
+  max-width: 85%;
 }
 div.confirmation-grid p {
   text-overflow: ellipsis;
@@ -126,10 +131,24 @@ div.confirmation-grid p {
   color: white !important;
 }
 
+.instruction-message {
+  display: block;
+  margin: 2rem auto 1rem auto;
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  background-color: lightgoldenrodyellow;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
 
-@media screen and (max-width: 1768px) {
+.instruction-message svg {
+  margin-right: 0.5rem;
+}
+
+
+@media screen and (max-width: 767px) {
   div.confirmation-grid img {
-    width: 20rem;
     height: 15rem;
   }
 
