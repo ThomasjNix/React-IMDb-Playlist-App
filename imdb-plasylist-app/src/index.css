@@ -12,9 +12,159 @@ code {
     monospace;
 }
 
-.playlists {
-  list-style-type: none;
+.playlist-description {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
-.playlists .no-movies-in-playlist {
+.playlist-description span {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+.playlist-description span svg {
+  color: red;
+  margin-right: 0.5rem;
+}
+div.search-results-list,
+div.playlists {
+  width: 80vw;
+  margin: 0 auto;
+  
+}
+div.playlists .no-movies-in-playlist {
   font-style: italic;
+}
+.return-home {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  display: flex;
+}
+
+.return-home:hover {
+  text-shadow: 0 0 2px white;
+}
+
+.return-home svg {
+  margin-right: 1rem;
+}
+.create-new-playlist {
+  margin-top: 5vh;
+}
+
+div.nav-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.search-wrapper svg {
+  padding: 0;
+  padding-left: 0.5rem;
+}
+
+.search-input {
+  padding-left: 3rem;
+}
+
+.search-input input {
+  color: white;
+}
+
+.poster {
+  max-width: 10vw;
+}
+
+.body-container {
+  margin-bottom: 10rem;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(25, 118, 210);
+  padding: 0.5rem 0;
+  color: white;
+}
+.confirmation-footer {
+  background-color: blue;
+  color: white;
+}
+
+form button {
+  margin-right: 0.5rem;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
+.single-result-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.nav-actions a {
+  margin-right: 1rem;
+}
+
+div.confirmation-grid {
+  width: 80vw;
+  margin: 0 auto;  
+}
+
+div.confirmation-grid img {
+  max-width: 85%;
+}
+div.confirmation-grid p {
+  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.search-button {
+  color: white !important;
+}
+
+.instruction-message {
+  display: block;
+  margin: 2rem auto 1rem auto;
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  background-color: lightgoldenrodyellow;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.instruction-message svg {
+  margin-right: 0.5rem;
+}
+
+
+@media screen and (max-width: 767px) {
+  div.confirmation-grid img {
+    height: 15rem;
+  }
+
+  .poster {
+    max-width: 50vw;
+  }
+
+  .search-button {
+    display: none !important;
+  }
+
+  .nav-search-container {
+    max-width: 50vw;
+  }
 }
