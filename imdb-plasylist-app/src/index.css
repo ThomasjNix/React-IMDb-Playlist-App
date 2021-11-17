@@ -37,13 +37,13 @@ div.playlists .no-movies-in-playlist {
 }
 .return-home {
   text-decoration: none;
-  color: black;
+  color: white;
   font-weight: bold;
   display: flex;
 }
 
 .return-home:hover {
-  color: white;
+  text-shadow: 0 0 2px white;
 }
 
 .return-home svg {
@@ -66,6 +66,10 @@ div.nav-toolbar {
 
 .search-input {
   padding-left: 3rem;
+}
+
+.search-input input {
+  color: white;
 }
 
 .poster {
