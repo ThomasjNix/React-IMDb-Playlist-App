@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-ui": "cd ../imdb-playlist-app && npm run build",
-    "start-watch": "npm run build-ui && node server.js"
+    "start": "npm run build-ui && node server.js"
   },
   "author": "Thomas Nix",
   "license": "ISC",
