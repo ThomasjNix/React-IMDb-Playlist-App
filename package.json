@@ -1,0 +1,20 @@
+{
+  "name": "react-imdb-playlist-app",
+  "version": "1.0.0",
+  "description": "Full project (UI + API) for IMDB API app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && npm run start-watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasjNix/React-IMDb-Playlist-App.git"
+  },
+  "author": "Thomas Nix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomasjNix/React-IMDb-Playlist-App/issues"
+  },
+  "homepage": "https://github.com/ThomasjNix/React-IMDb-Playlist-App#readme"
+}
